@@ -9,5 +9,10 @@ namespace TodoList.Migrations
 {
     public class Configuration:DbMigrationsConfiguration<TodoDbContext>
     {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = false;
+        }
+        
     }
 }
