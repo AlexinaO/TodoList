@@ -15,7 +15,7 @@ namespace TodoList.Controllers
 
         public IQueryable<Categorie> GetCategories()
         {
-            return db.Categories;
+            return db.Categories.OrderBy(x => x.Nom);
         }
         protected override void Dispose(bool disposing)
         {
