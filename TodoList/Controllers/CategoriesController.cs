@@ -17,6 +17,14 @@ namespace TodoList.Controllers
         {
             return db.Categories.OrderBy(x => x.Nom);
         }
+
+        public IHttpActionResult PostCategories(Categorie categorie)
+        {
+            db.Categories.Add(categorie);
+            db.SaveChanges();
+
+            return Ok(categorie);
+        }
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
