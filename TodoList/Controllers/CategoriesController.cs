@@ -9,5 +9,9 @@ namespace TodoList.Controllers
 {
     public class CategoriesController : ApiController
     {
+        public string GetCategories()
+        {
+            return "toto";
+        }
     }
 }
