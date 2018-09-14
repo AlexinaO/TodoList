@@ -20,11 +20,17 @@ namespace TodoList.Controllers
 
         public IHttpActionResult PostCategories(Categorie categorie)
         {
-            db.Categories.Add(categorie);
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                db.Categories.Add(categorie);
+                db.SaveChanges();
 
-            return Ok(categorie);
+                return Ok(categorie);
+            }
+            else
+                return BadRequest(ModelState);
         }
+
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
