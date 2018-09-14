@@ -46,19 +46,16 @@ namespace TodoList.Controllers
             return StatusCode(HttpStatusCode.NoContent); // renvoyer un code status donc erreur 204 pour dire bien passé mais rien à re
         }
 
-        public IHttpActionResult DeleteCategories(int id, Categorie categorie)
+        public IHttpActionResult DeleteCategories(int id)
         {
-            if (id != categorie.ID)
-                return BadRequest();
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            if (db.Categories.Count(x => x.ID == id) != 1)
-                return BadRequest();
+            var categorie = db.Categories.Find(id);
+            if (categorie== null)
+                return NotFound();
 
             db.Entry(categorie).State = System.Data.Entity.EntityState.Deleted;
             db.SaveChanges();
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(categorie);
         }
 
         protected override void Dispose(bool disposing)
