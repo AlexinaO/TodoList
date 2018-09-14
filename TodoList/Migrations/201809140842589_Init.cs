@@ -12,7 +12,7 @@ namespace TodoList.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Nom = c.String(),
+                        Nom = c.String(nullable: false, maxLength: 20),
                     })
                 .PrimaryKey(t => t.ID);
             
