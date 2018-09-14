@@ -15,7 +15,7 @@ namespace TodoList.Models
         [StringLength(30)]
         public string Nom { get; set; }
 
-        [StringLength(30)]
+        [StringLength(250)]
         public string Description { get; set; }
 
         public DateTime? DateFin { get; set; }
