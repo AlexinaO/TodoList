@@ -31,5 +31,7 @@ namespace TodoList.Models
         [ForeignKey ("CategoryID")]
         public Categorie Categorie { get; set; }
 
+
+
     }
 }
