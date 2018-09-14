@@ -18,6 +18,15 @@ namespace TodoList.Controllers
             return db.Categories.OrderBy(x => x.Nom);
         }
 
+        public IHttpActionResult GetCategorie(int id)
+        {
+            var categorie = db.Categories.Find(id);
+            if (categorie == null)
+                return NotFound();
+
+            return Ok(categorie);
+        }
+
         public IHttpActionResult PostCategories(Categorie categorie)
         {
             if (ModelState.IsValid)
