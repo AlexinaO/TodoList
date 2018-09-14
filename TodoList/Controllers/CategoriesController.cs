@@ -31,6 +31,21 @@ namespace TodoList.Controllers
                 return BadRequest(ModelState);
         }
 
+        public IHttpActionResult PutCategories(int id, Categorie categorie)
+        {
+            if (id != categorie.ID)
+                return BadRequest();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (db.Categories.Find(id) == null)
+                return BadRequest();
+
+            db.Entry(categorie).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent); // renvoyer un code status donc erreur 204 pour dire bien passé mais rien à retourner
+        }
+
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
