@@ -8,7 +8,7 @@
     <title></title>
 </head>
 <body>
-    
+    <div class="container"></div>
     <h1>ToDoList</h1>
     <div id="listeTaches">
         
@@ -26,14 +26,18 @@
                     var divlisteTaches = $('#listeTaches'); 
                     for (tache of taches) { 
                         var divTache = $('<div class="Tache"></div>');
-                        divTache.data ("id", tache.ID); //pour écrire la valeur
+                        divTache.data("data-id", tache.ID); //pour écrire la valeur
+
                         var inputEtat = $('<input type="checkbox">');
                         inputEtat.attr('checked', tache.Statut);
+                        if (tache.Statut) {
+                            divTache.addClass('alert-success')
+                        }
 
                         //appeler le serveur quand on clique dessus
                         inputEtat.on('click', function () {
                             var div = $(this).closest(".Tache");
-                            var idTache = div.data("id"); //pour prendre la valeur
+                            var idTache = div.data("data-id"); //pour prendre la valeur
 
                             ModifierStatutTache(idTache, this.checked)
                         });
@@ -54,12 +58,18 @@
             alert("Erreur !");
         }
 
-        function ModifierStatutTache(id, statut) {
+        function ModifierStatutTache(id, input) {
             $.ajax({
                 type: 'PUT',
-                url: '/api/tachesstatut/' + id + '?statut=' + statut,
+                url: '/api/tachesstatut/' + id + '?statut=' + input.checked,
                 success: function () {
-
+                    var divTache = $(input).closest(".Tache");
+                    if (input.checked) {
+                        divTache.addClass('alert-success');
+                    }
+                    else {
+                        divTache.removeClass('alert-success');
+                    }
                 },
                 error: Erreur
             })
