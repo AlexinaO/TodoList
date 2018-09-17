@@ -13,6 +13,9 @@
         .Tache input[type=checkbox]{
             margin-right:10px;
         }
+        .button{
+            float: right;
+        }
     </style>
     <title></title>
 </head>
@@ -52,8 +55,16 @@
                             ModifierStatutTache(idTache, this)
                         });
 
+                        var buttonDelete = $('<button class="btn btn-danger">Delete</button>');
+                        buttonDelete.on('click', function () {
+                            var div = $(this).closest(".Tache");
+                            var idTache = div.attr("data-id");
+                            Supprimer(idTache, div)
+                        })
+
                         divTache.append(inputEtat);
                         divTache.append($('<label></label>').text(tache.Nom));
+                        div.Tache.append(buttonDelete);
 
                         divlisteTaches.append(divTache);
 
