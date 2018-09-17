@@ -20,13 +20,23 @@
             $.ajax({
                 url: 'http://localhost:55912/api/taches/',
                 success: function (taches) {
+
+                    // Avec JQuery
                     var ullisteTaches = $('#listeTaches'); /*on crée un élément de liste de taches*/
                     for (tache of taches) { //pour chaque élément on fait
                         var li = $('<li>').text(tache.Nom);//une liste
                         ullisteTaches.append(li);//on "appende" la liste des taches à l'élément pour l'afficher dans l'HTML à l'endroit où l'on veut
 
                     }
-                    console.log(taches);
+
+                    //Sans JQuery
+                    var ulLiseTaches1 = document.getElementById('listeTaches');
+                    for (tache of taches) {
+                        var li1 = document.createElement("li");
+                        li1.textContent = tache.Nom;
+                        alert(li1.innerHTML);
+                        ulLiseTaches1.appendChild(li1);
+                    }
                 },
                 error: function () {
                     alert("Coucou");
