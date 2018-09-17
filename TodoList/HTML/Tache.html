@@ -15,13 +15,13 @@
         </h1>
         <form>
             <div class="form-group">
-                <label for=" Nom">Nom</label>
+                <label for="Nom">Nom</label>
                 <input type="text" class="form-control" id="Nom" />
             </div>
 
             <div class="form-group">
-                <label for=" Description">Description</label>
-                <textarea class="form-control" id=" Description" rows="3"></textarea>
+                <label for="Description">Description</label>
+                <textarea class="form-control" id="Description" rows="3"></textarea>
             </div>
 
             <div class="form-group">
@@ -29,7 +29,7 @@
                 <select class="form-control" id="Categorie"></select>
             </div>
 
-            <button class="btn btn-primary" onclick="Enregistrer()">Enregistrer</button>
+            <button class="btn btn-primary" onclick="return Enregistrer();">Enregistrer</button>
 
         </form>
 
@@ -37,11 +37,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script>
         function Enregistrer() {
-            //var form = document.getElementsByTagName('form');
-            //form.checkValidity()) {
-            //    alert("~B^)");
-            //}
-            
+            var tache = {
+                Nom: $('#Nom').val(),
+                Description: $('#Description').val(),
+                CategoryID: $('#Categorie').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/taches',
+                data:tache,
+                success: function () {
+                    window.location.href = '/default.html';
+
+                },
+                error: function () {
+                    alert('Aïe aïe aïe Caramba !');
+                }
+            });
+            return false;
         }
 
         function LoadCategories() {
@@ -54,7 +68,7 @@
 
                     for (categorie of categories) {
                         var option = $('<option></option>');
-                        option.val('value', categorie.ID);
+                        option.val(categorie.ID);
                         option.text(categorie.Nom);
                         select.append(option);
                     }
