@@ -45,7 +45,21 @@
         }
 
         function LoadCategories() {
+            $.ajax({
+                url: '/api/categories',
+                success: function (categories) {
+                    var select = $("#Categorie");
+                    select.empty();
+                    select.append($('<option></option>')); //élément vide
 
+                    for (categorie of categories) {
+                        var option = $('<option></option>');
+                        option.val('value', categorie.ID);
+                        option.text(categorie.Nom);
+                        select.append(option);
+                    }
+                }
+            })
         }
         LoadCategories();
     </script>
