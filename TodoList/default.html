@@ -18,7 +18,7 @@
     <script>
         function getTaches() {
             $.ajax({
-                url: 'http://localhost:55912/api/taches/',
+                url: '/api/taches/',
                 success: function (taches) {
 
                     // Avec JQuery
@@ -56,7 +56,7 @@
         function ModifierStatutTache(id, statut) {
             $.ajax({
                 type: 'PUT',
-                url: 'http://localhost:55912/api/tachesstatut/' + id + '?statut=' + statut,
+                url: '/api/tachesstatut/' + id + '?statut=' + statut,
                 success: function () {
 
                 },
