@@ -25,13 +25,13 @@
                     var divlisteTaches = $('#listeTaches'); 
                     for (tache of taches) { 
                         var divTache = $('<div class="Tache"></div>');
-                        divTache.data = ("id", tache.ID);
+                        divTache.data = ("id", tache.ID); //pour écrire la valeur
                         var inputEtat = $('<input type="radio">');
 
                         //appeler le serveur quand on clique dessus
                         inputEtat.on('click', function () {
                             var div = $(this).closest(".Tache");
-                            var idTache = div.data("id");
+                            var idTache = div.data("id"); //pour prendre la valeur
 
                             ModifierStatutTache(idTache, this.checked)
                         });
