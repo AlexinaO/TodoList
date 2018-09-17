@@ -118,17 +118,6 @@
             })
         }
 
-        function ajouter() {
-            $.ajax({
-                type: 'DELETE',
-                url: 'api/taches/' + id,
-                success: function () {
-                    $(div).remove();
-
-                },
-                error: Erreur
-            })
-        }
         getTaches();
 
     </script>
