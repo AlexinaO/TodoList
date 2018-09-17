@@ -9,6 +9,10 @@
 </head>
 <body>
     <h1>ToDoList</h1>
+    <ul id="listeTaches">
+        
+
+    </ul>
 
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script>
@@ -16,6 +20,12 @@
             $.ajax({
                 url: 'http://localhost:55912/api/taches/',
                 success: function (taches) {
+                    var ullisteTaches = $('#listeTaches');
+                    for (tache of taches) {
+                        var li = $('<li>').text(tache.Nom);
+                        ullisteTaches.append(li);
+
+                    }
                     console.log(taches);
                 },
                 error: function () {
