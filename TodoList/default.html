@@ -25,7 +25,7 @@
                     var divlisteTaches = $('#listeTaches'); 
                     for (tache of taches) { 
                         var divTache = $('<div class="Tache"></div>');
-                        divTache.data = ("id", tache.ID); //pour écrire la valeur
+                        divTache.data ("id", tache.ID); //pour écrire la valeur
                         var inputEtat = $('<input type="radio">');
                         inputEtat.attr('checked', tache.Statut);
 

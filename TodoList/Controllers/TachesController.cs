@@ -72,7 +72,7 @@ namespace TodoList.Controllers
         }
 
         [ResponseType(typeof(void))]
-        [Route("api/TacheStatut/{id}")]
+        [Route("api/Tachesstatut/{id}")]
         [HttpPut]
         public IHttpActionResult PutTacheStatut(int id, bool statut)
         {
