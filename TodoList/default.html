@@ -29,14 +29,6 @@
 
                     }
 
-                    //Sans JQuery
-                    var ulLiseTaches1 = document.getElementById('listeTaches');
-                    for (tache of taches) {
-                        var li1 = document.createElement("li");
-                        li1.textContent = tache.Nom;
-                        alert(li1.innerHTML);
-                        ulLiseTaches1.appendChild(li1);
-                    }
                 },
                 error: function () {
                     alert("Erreur !");
