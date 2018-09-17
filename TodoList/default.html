@@ -41,7 +41,19 @@
         function Erreur() {
             alert("Erreur !");
         }
+
+        function ModifierStatutTache(id, statut) {
+            $.ajax({
+                mode: 'PUT',
+                url: 'http://localhost:55912/api/tachesstatut/' + id + '?statut=' + statut,
+                success: function () {
+
+                },
+                error: Erreur
+            })
+        }
         getTaches();
+
     </script>
 </body>
 </html>
