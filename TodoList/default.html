@@ -8,6 +8,7 @@
     <title></title>
 </head>
 <body>
+    
     <h1>ToDoList</h1>
     <div id="listeTaches">
         
@@ -26,7 +27,7 @@
                     for (tache of taches) { 
                         var divTache = $('<div class="Tache"></div>');
                         divTache.data ("id", tache.ID); //pour écrire la valeur
-                        var inputEtat = $('<input type="radio">');
+                        var inputEtat = $('<input type="checkbox">');
                         inputEtat.attr('checked', tache.Statut);
 
                         //appeler le serveur quand on clique dessus
