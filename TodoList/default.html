@@ -25,7 +25,17 @@
                     var divlisteTaches = $('#listeTaches'); 
                     for (tache of taches) { 
                         var divTache = $('<div class="Tache"></div>');
+                        divTache.data = ("id", tache.ID);
                         var inputEtat = $('<input type="radio">');
+
+                        //appeler le serveur quand on clique dessus
+                        inputEtat.on('click', function () {
+                            var div = $(this).closest(".Tache");
+                            var idTache = div.data("id");
+
+                            ModifierStatutTache(idTache, this.checked)
+                        });
+
                         divTache.append(inputEtat);
                         divTache.append($('<label></label>').text(tache.Nom));
 
@@ -44,7 +54,7 @@
 
         function ModifierStatutTache(id, statut) {
             $.ajax({
-                mode: 'PUT',
+                type: 'PUT',
                 url: 'http://localhost:55912/api/tachesstatut/' + id + '?statut=' + statut,
                 success: function () {
 
