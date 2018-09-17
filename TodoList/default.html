@@ -9,10 +9,10 @@
 </head>
 <body>
     <h1>ToDoList</h1>
-    <ul id="listeTaches">
+    <div id="listeTaches">
         
 
-    </ul>
+    </div>
 
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script>
@@ -22,19 +22,24 @@
                 success: function (taches) {
 
                     // Avec JQuery
-                    var ullisteTaches = $('#listeTaches'); /*on crée un élément de liste de taches*/
-                    for (tache of taches) { //pour chaque élément on fait
-                        var li = $('<li>').text(tache.Nom);//une liste
-                        ullisteTaches.append(li);//on "appende" la liste des taches à l'élément pour l'afficher dans l'HTML à l'endroit où l'on veut
+                    var divlisteTaches = $('#listeTaches'); 
+                    for (tache of taches) { 
+                        var divTache = $('<div></div>');
+                        var inputEtat = $('<input type="radio">');
+                        divTache.append(inputEtat);
+                        divTache.append($('<span></span>').text(tache.Nom));
+
+                        divlisteTaches.append(divTache);
 
                     }
 
                 },
-                error: function () {
-                    alert("Erreur !");
-                }
+                error:Erreur
             });
             
+        }
+        function Erreur() {
+            alert("Erreur !");
         }
         getTaches();
     </script>
