@@ -15,6 +15,10 @@
         }
         .Tache button{
             float: right;
+            display: none;
+        }
+        .Tache:hover button{
+            display: block;
         }
     </style>
     <title></title>
@@ -91,6 +95,18 @@
                     else {
                         divTache.removeClass('alert-success');
                     }
+                },
+                error: Erreur
+            })
+        }
+
+        function Supprimer(id, div) {
+            $.ajax({
+                type: 'DELETE',
+                url: 'api/taches/' + id,
+                success: function () {
+                    $(div).remove();
+                        
                 },
                 error: Erreur
             })
