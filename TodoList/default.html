@@ -26,6 +26,9 @@
 <body>
     <div class="container">
         <h1>ToDoList</h1>
+        <div style="margin-bottom:25px;">
+            <a href="/HTML/Tache.html" class="btn btn-primary btn-sm">+</a>
+        </div>
         <div id="listeTaches">
 
         </div>
@@ -60,12 +63,14 @@
                         });
 
                         //Bouton supprimer
-                        var buttonDelete = $('<button class="btn btn-danger">Delete</button>');
+                        var buttonDelete = $('<button class="btn btn-danger btn-sm">Delete</button>');
                         buttonDelete.on('click', function () {
                             var div = $(this).closest(".Tache");
                             var idTache = div.attr("data-id");
                             Supprimer(idTache, div)
                         })
+
+                        
 
                         divTache.append(inputEtat);
                         divTache.append($('<label></label>').text(tache.Nom));
@@ -108,6 +113,18 @@
                 success: function () {
                     $(div).remove();
                         
+                },
+                error: Erreur
+            })
+        }
+
+        function ajouter() {
+            $.ajax({
+                type: 'DELETE',
+                url: 'api/taches/' + id,
+                success: function () {
+                    $(div).remove();
+
                 },
                 error: Erreur
             })
