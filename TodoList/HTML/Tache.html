@@ -82,6 +82,7 @@
                     var select = $("#Categorie");
                     select.empty();
                     select.append($('<option></option>')); //élément vide
+                    select.append($('<option>Nouvelle Catégorie</option>'));
 
                     for (categorie of categories) {
                         var option = $('<option></option>');
