@@ -81,27 +81,10 @@
                         ////Bouton modifier catégorie
                         var buttonModify = $('<button id="ModifyButton" class="btn btn-warning btn-sm">Modifier Catégorie</button>')
                         buttonModify.on('click', function () {
-                            var idCategorie = $(this).closest(".Categorie");
-                            ModifierCategorie(idCategorie, div)
+                            var idCategorie = $(this).closest(".Categorie").data('id');
+                            var nomCategorie = $(this).closest(".Categorie").data('Nom');
+                            ModifierCategorie(idCategorie, nomCategorie)
                         })
-
-
-
-                        //if (tache.Statut) {
-                        //    divTache.addClass('alert-success')
-                        //}
-
-                        //var inputEtat = $('<input type="checkbox">');
-                        //inputEtat.attr('checked', tache.Statut);
-
-
-                        //appeler le serveur quand on clique dessus
-                        //inputEtat.on('click', function () {
-                        //    var div = $(this).closest(".Tache");
-                        //    var idTache = div.attr("data-id"); //pour prendre la valeur
-
-                        //    ModifierStatutTache(idTache, this)
-                        //});
 
                         //Bouton supprimer
                         var buttonDelete = $('<button id="DeleteButton" class="btn btn-danger btn-sm">Supprimer</button>');
@@ -124,12 +107,22 @@
 
         }
 
-        //function ModifierCategorie(id, div) {
-            //$.ajax({
-            //    type: 'PUT',
-            //    url: '/api/tachesstatut/' + id + '?statut=' + input.checked,
-            //    success: function () {
-            //        var divTache = $(input).closest(".Tache");
+        //function ModifierCategorie(id, nomCategorie) {
+        //    var inputName = $('<input type="text" id="NewCategoryName>');
+        //    inputName.attr('Nom', categorie.Nom);
+
+
+
+
+
+        //    $.ajax({
+        //        type: 'PUT',
+        //        url: '/api/categories/' + idCategorie ,
+        //        success: function () {
+                    
+
+
+            //        var idCategorie = $(this).closest(".Categorie").data('id');
             //        if (input.checked) {
             //            divTache.addClass('alert-success');
             //        }
@@ -139,6 +132,25 @@
             //    },
             //    error: Erreur
             //})
+        //}
+
+
+
+        //function ModifierStatutTache(id, input) {
+        //    $.ajax({
+        //        type: 'PUT',
+        //        url: '/api/tachesstatut/' + id + '?statut=' + input.checked,
+        //        success: function () {
+        //            var divTache = $(input).closest(".Tache");
+        //            if (input.checked) {
+        //                divTache.addClass('alert-success');
+        //            }
+        //            else {
+        //                divTache.removeClass('alert-success');
+        //            }
+        //        },
+        //        error: Erreur
+        //    })
         //}
 
         function Supprimer(idCategorie) {
