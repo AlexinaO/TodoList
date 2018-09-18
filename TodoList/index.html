@@ -60,12 +60,15 @@
 </script>
     <script>
         function getTaches() {
+            var divlisteTaches = $('#listeTaches');
+            //setLoader(divlisteTaches);
             $.ajax({
                 url: '/api/taches/',
                 success: function (taches) {
+                    divlisteTaches.empty();
 
                     // Avec JQuery
-                    var divlisteTaches = $('#listeTaches');
+                    
                     for (tache of taches) {
                         var divTache = $('<div class="Tache alert"></div>');
                         divTache.attr("data-id", tache.ID); //pour écrire la valeur
