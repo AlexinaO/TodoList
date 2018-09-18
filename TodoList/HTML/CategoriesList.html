@@ -15,6 +15,12 @@
         <div id="listeCategories">
 
         </div>
+        <form>
+            <div class="form-group">
+                <label for="NewCategory">Nom de la nouvelle Catégorie</label>
+                <input type="text" class="form-control" id="Nom" />
+            </div>
+</div>
 
 
     </div>
@@ -30,6 +36,17 @@
                     for (categorie of categories) {
                         var divCategorie = $('<div class="Categorie alert"></div>');
                         divCategorie.attr("data-id", categorie.ID); //pour écrire la valeur
+
+                        //Bouton modifier catégorie
+                        var buttonModify = $('<button class="btn btn-warning btn-sm">Modifier Catégorie</button>')
+                        buttonModify.on('click', function () {
+                            var div = $(this).closest(".Categorie");
+                            var idCategorie = div.attr("data-id");
+                            ModifierCategorie(idCategorie, div)
+                        })
+
+
+
                         //if (tache.Statut) {
                         //    divTache.addClass('alert-success')
                         //}
@@ -55,9 +72,10 @@
                         })
 
 
-
+                        
                         //divTache.append(inputEtat);
                         divCategorie.append($('<label></label>').text(categorie.Nom));
+                        divCategorie.append(buttonModify);
                         divCategorie.append(buttonDelete);
 
                         divlisteCategories.append(divCategorie);
@@ -73,21 +91,21 @@
             alert("Erreur !");
         }
 
-        function ModifierStatutTache(id, input) {
-            $.ajax({
-                type: 'PUT',
-                url: '/api/tachesstatut/' + id + '?statut=' + input.checked,
-                success: function () {
-                    var divTache = $(input).closest(".Tache");
-                    if (input.checked) {
-                        divTache.addClass('alert-success');
-                    }
-                    else {
-                        divTache.removeClass('alert-success');
-                    }
-                },
-                error: Erreur
-            })
+        function ModifierCategorie(id, div) {
+            //$.ajax({
+            //    type: 'PUT',
+            //    url: '/api/tachesstatut/' + id + '?statut=' + input.checked,
+            //    success: function () {
+            //        var divTache = $(input).closest(".Tache");
+            //        if (input.checked) {
+            //            divTache.addClass('alert-success');
+            //        }
+            //        else {
+            //            divTache.removeClass('alert-success');
+            //        }
+            //    },
+            //    error: Erreur
+            //})
         }
 
         function Supprimer(id, div) {
