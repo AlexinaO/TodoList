@@ -5,9 +5,41 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
+    <style>
+        .Categorie {
+            border: solid 1px lightgray;
+            padding: 10px;
+        }
+
+            .Categorie input[type=checkbox] {
+                margin-right: 10px;
+            }
+
+            .Categorie button {
+                float: right;
+                display: none;
+            }
+
+            .Categorie:hover button {
+                display: block;
+            }
+    </style>
     <title></title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">TodoApp</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Taches</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" disabled>Catégories <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <h1>
             Liste des Catégories
@@ -15,35 +47,34 @@
         <div id="listeCategories">
 
         </div>
-        <form>
-            <div class="form-group">
-                <label for="NewCategory">Nom de la nouvelle Catégorie</label>
-                <input type="text" class="form-control" id="Nom" />
+        
+            <div>
+                <input type="text" id="Nom" />
+                <button id="SaveButton" class="btn btn-primary" onclick="Ajouter()">Ajouter</button>
             </div>
-</div>
-
-
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script>
-        function getCategories() {
+        function LoadCategories() {
             $.ajax({
-                url: '/api/categories/',
+                url: '/api/categories',
                 success: function (categories) {
 
                     // Avec JQuery
                     var divlisteCategories = $('#listeCategories');
-                    for (categorie of categories) {
-                        var divCategorie = $('<div class="Categorie alert"></div>');
-                        divCategorie.attr("data-id", categorie.ID); //pour écrire la valeur
+                    divlisteCategories.empty();
+                    for (var categorie of categories) {
+                        var divCategorie = $('<div class="Categorie"></div>');
+                        divCategorie.data('id', categorie.ID);
+                        divCategorie.append($('<span></span>').text(categorie.Nom));
 
-                        //Bouton modifier catégorie
-                        var buttonModify = $('<button class="btn btn-warning btn-sm">Modifier Catégorie</button>')
-                        buttonModify.on('click', function () {
-                            var div = $(this).closest(".Categorie");
-                            var idCategorie = div.attr("data-id");
-                            ModifierCategorie(idCategorie, div)
-                        })
+                        ////Bouton modifier catégorie
+                        //var buttonModify = $('<button id="ModifyButton" class="btn btn-warning btn-sm">Modifier Catégorie</button>')
+                        //buttonModify.on('click', function () {
+                        //    var idCategorie = $(this).closest(".Categorie");
+                        //    ModifierCategorie(idCategorie, div)
+                        //})
 
 
 
@@ -64,34 +95,27 @@
                         //});
 
                         //Bouton supprimer
-                        var buttonDelete = $('<button class="btn btn-danger btn-sm">Delete</button>');
+                        var buttonDelete = $('<button id="DeleteButton" class="btn btn-danger btn-sm">Supprimer</button>');
                         buttonDelete.on('click', function () {
-                            var div = $(this).closest(".Tache");
-                            var idTache = div.attr("data-id");
-                            Supprimer(idTache, div)
-                        })
+                            var idCategorie = $(this).closest(".Categorie").data('id');
+                            Supprimer(idCategorie);
+                        });
 
 
                         
-                        //divTache.append(inputEtat);
-                        divCategorie.append($('<label></label>').text(categorie.Nom));
-                        divCategorie.append(buttonModify);
+                        //divCategorie.append(buttonModify);
                         divCategorie.append(buttonDelete);
 
                         divlisteCategories.append(divCategorie);
 
                     }
 
-                },
-                error: Erreur
+                }
             });
 
         }
-        function Erreur() {
-            alert("Erreur !");
-        }
 
-        function ModifierCategorie(id, div) {
+        //function ModifierCategorie(id, div) {
             //$.ajax({
             //    type: 'PUT',
             //    url: '/api/tachesstatut/' + id + '?statut=' + input.checked,
@@ -106,21 +130,40 @@
             //    },
             //    error: Erreur
             //})
-        }
+        //}
 
-        function Supprimer(id, div) {
+        function Supprimer(idCategorie) {
             $.ajax({
                 type: 'DELETE',
-                url: 'api/taches/' + id,
+                url: '/api/categories/' + idCategorie,
                 success: function () {
-                    $(div).remove();
-
+                    LoadCategories();
                 },
-                error: Erreur
-            })
+                error: function () {
+                    alert('Impossible de supprimer. Peut-être la catégorie est liée à une tâche?');
+                }
+            });
+        }
+                   
+        function Ajouter() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/categories',
+                data: {
+                    Nom: $('#Nom').val()
+                },
+                success: function () {
+                    LoadCategories()
+                        $('#Nom').val('');
+
+                }
+            });
         }
 
-        getCategories();
+        $(document).ready(function () {
+            LoadCategories();
+            $('#Nom').focus();
+        });
     </script>
 </body>
            
