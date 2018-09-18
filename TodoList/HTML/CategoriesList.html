@@ -8,6 +8,102 @@
     <title></title>
 </head>
 <body>
+    <div class="container">
+        <h1>
+            Liste des Catégories
+        </h1>
+        <div id="listeCategories">
 
+        </div>
+
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script>
+        function getCategories() {
+            $.ajax({
+                url: '/api/categories/',
+                success: function (categories) {
+
+                    // Avec JQuery
+                    var divlisteCategories = $('#listeCategories');
+                    for (categorie of categories) {
+                        var divCategorie = $('<div class="Categorie alert"></div>');
+                        divCategorie.attr("data-id", categorie.ID); //pour écrire la valeur
+                        //if (tache.Statut) {
+                        //    divTache.addClass('alert-success')
+                        //}
+
+                        //var inputEtat = $('<input type="checkbox">');
+                        //inputEtat.attr('checked', tache.Statut);
+
+
+                        //appeler le serveur quand on clique dessus
+                        //inputEtat.on('click', function () {
+                        //    var div = $(this).closest(".Tache");
+                        //    var idTache = div.attr("data-id"); //pour prendre la valeur
+
+                        //    ModifierStatutTache(idTache, this)
+                        //});
+
+                        //Bouton supprimer
+                        var buttonDelete = $('<button class="btn btn-danger btn-sm">Delete</button>');
+                        buttonDelete.on('click', function () {
+                            var div = $(this).closest(".Tache");
+                            var idTache = div.attr("data-id");
+                            Supprimer(idTache, div)
+                        })
+
+
+
+                        //divTache.append(inputEtat);
+                        divCategorie.append($('<label></label>').text(categorie.Nom));
+                        divCategorie.append(buttonDelete);
+
+                        divlisteCategories.append(divCategorie);
+
+                    }
+
+                },
+                error: Erreur
+            });
+
+        }
+        function Erreur() {
+            alert("Erreur !");
+        }
+
+        function ModifierStatutTache(id, input) {
+            $.ajax({
+                type: 'PUT',
+                url: '/api/tachesstatut/' + id + '?statut=' + input.checked,
+                success: function () {
+                    var divTache = $(input).closest(".Tache");
+                    if (input.checked) {
+                        divTache.addClass('alert-success');
+                    }
+                    else {
+                        divTache.removeClass('alert-success');
+                    }
+                },
+                error: Erreur
+            })
+        }
+
+        function Supprimer(id, div) {
+            $.ajax({
+                type: 'DELETE',
+                url: 'api/taches/' + id,
+                success: function () {
+                    $(div).remove();
+
+                },
+                error: Erreur
+            })
+        }
+
+        getCategories();
+    </script>
 </body>
+           
 </html>
