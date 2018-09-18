@@ -15,7 +15,7 @@
                 margin-right: 10px;
             }
 
-            .Categorie button {
+          .Categorie button {
                 float: right;
                 display: none;
             }
@@ -23,6 +23,15 @@
             .Categorie:hover button {
                 display: block;
             }
+
+        #ModifyButton {
+            padding-right:2em;
+        }
+
+        #DeleteButton{
+            padding : 10px;
+        }
+
     </style>
     <title></title>
 </head>
@@ -70,11 +79,11 @@
                         divCategorie.append($('<span></span>').text(categorie.Nom));
 
                         ////Bouton modifier catégorie
-                        //var buttonModify = $('<button id="ModifyButton" class="btn btn-warning btn-sm">Modifier Catégorie</button>')
-                        //buttonModify.on('click', function () {
-                        //    var idCategorie = $(this).closest(".Categorie");
-                        //    ModifierCategorie(idCategorie, div)
-                        //})
+                        var buttonModify = $('<button id="ModifyButton" class="btn btn-warning btn-sm">Modifier Catégorie</button>')
+                        buttonModify.on('click', function () {
+                            var idCategorie = $(this).closest(".Categorie");
+                            ModifierCategorie(idCategorie, div)
+                        })
 
 
 
@@ -103,7 +112,7 @@
 
 
                         
-                        //divCategorie.append(buttonModify);
+                        divCategorie.append(buttonModify);
                         divCategorie.append(buttonDelete);
 
                         divlisteCategories.append(divCategorie);
