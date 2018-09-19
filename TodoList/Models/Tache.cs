@@ -30,6 +30,12 @@ namespace TodoList.Models
         [ForeignKey ("CategoryID")]
         public Categorie Categorie { get; set; }
 
+        /*public string CategoryNom { get; set; }
+
+        [ForeignKey ("CategoryNom")]
+        public Categorie Categorie { get; set; }*/
+
+
 
 
     }
