@@ -32,10 +32,12 @@
 
             <div class="form-group">
                 <label for="Priority">Priorité</label>
-                <input type="radio" />Basse
-                <input type="radio" />Moyenne
-                <input type="radio" />Haute
-
+                <input type="radio" id="basse"
+                       class="Priorite" name="priorite" value="1" /> Basse
+                <input type="radio" id="moyenne"
+                       class="Priorite" name="priorite" value="2" /> Moyenne
+                <input type="radio" id="haute"
+                       class="Priorite" name="priorite" value="3" /> Haute
             </div>
 
             <div class="form-group">
@@ -67,11 +69,17 @@
             if (!Valider()) {
                 return false;
             }
+
+            let valeur = document.querySelector('input[name=priorite]:checked').value;
+            console.log(valeur);
+
             let tache = {
                 Nom: $('#Nom').val(),
                 Description: $('#Description').val(),
-                CategoryID: $('#Categorie').val()
+                CategoryID: $('#Categorie').val(),
+                Priorite: valeur
             };
+            
 
             $.ajax({
                 type: 'POST',
