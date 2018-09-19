@@ -162,26 +162,6 @@
 
         }
 
-        //function ModifierCategorie(id) {
-        //    var inputName = $('<input type="text" id="NewCategoryName>');
-        //    inputName.attr('NewCategoryName', categorie.Nom);
-        //    var idCategorie = $(this).closest(".Categorie").data('id');
-        //    $.ajax({
-        //        type: 'PUT',
-        //        url: '/api/categories/' + idCategorie,
-        //        data: {
-        //            Nom: $("#NewCategoryName").val(),
-        //            ID: $("idCategorie").val()
-        //        },
-        //        success: function () {
-        //            LoadCategories();
-        //        },
-        //        error: function () {
-        //            alert('Impossible de modifier le nom de la catégorie');
-        //        }
-        //    })
-        //}
-
         function Supprimer(idCategorie) {
             $.ajax({
                 type: 'DELETE',
