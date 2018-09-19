@@ -60,6 +60,8 @@ namespace TodoList.Controllers
             var categorie = db.Categories.Find(id);
             if (categorie== null)
                 return NotFound();
+            if (db.Taches.Count(x => x.CategoryID ==id) != 0)
+                return BadRequest("Impossible de supprimer parce que la catégorie est associée à une tâche");
 
             db.Entry(categorie).State = System.Data.Entity.EntityState.Deleted;
             db.SaveChanges();

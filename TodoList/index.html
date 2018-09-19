@@ -48,26 +48,30 @@
         .nav-link{
             font-size:large;
         }
+
+        .active {
+            background-color: gray;
+        }
             
     </style>
     <title></title>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-light" id="MonNav" style="background-color: deeppink;">
-        <a class="navbar-brand" href="/">TodoApp</a>
+        <a class="navbar-brand active" href="/">TodoApp</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Taches</a>
+                    <a class="nav-link" href="/HTML/Tache.html">Taches</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="HTML/CategoriesList.html" disabled>Catégories <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/HTML/CategoriesList.html" disabled>Catégories <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="container">
-        <h1>ToDoList</h1>
+        <h1>Liste des Tâches</h1>
         <div style="margin-bottom:25px;">
             <a href="/HTML/Tache.html" class="btn btn-primary btn-sm">+</a>
             <a href="/HTML/CategoriesList.html" class="btn btn-info btn-sm">Liste des Catégories</a>
