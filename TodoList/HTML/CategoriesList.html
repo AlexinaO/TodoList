@@ -146,19 +146,19 @@
                 }
             });
 
-            var discardButton = $('<button class="btn tn-secondary btn-sm">Annuler</button>');
+            var discardButton = $('<button class="btn btn-secondary btn-sm">Annuler</button>');
             discardButton.on('click', function () {
                 let divCategorie = $(this).closest('.Categorie');
                 AnnulerModification(divCategorie);
             });
             div.append(discardButton);
 
-            var SaveButton2 = $('<button class="btn btn-secondary btn-sm>Enregister</button>');
+            var SaveButton2 = $('<button class="btn btn-primary btn-sm">Enregister</button>');
+            div.append(SaveButton2);
             SaveButton2.on('click', function () {
                 EnregistrerModification($(this).closest('.Categorie'));
             });
 
-            div.append(SaveButton2);
 
         }
 
